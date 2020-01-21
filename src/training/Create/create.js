@@ -1,8 +1,5 @@
 import React ,{components} from 'react';
-import './create.css';
 import DatePicker from 'react-date-picker';
-//import Table from './display';
-import {BrowserRouter,Route} from 'react-router-dom';
 
 
 class Create extends React.Component{
@@ -19,19 +16,19 @@ handleChange= e => {
 };
  handleSubmit=e=>{
     e.preventDefault();
-  //<Route path='/training/Display/display' component={Table}/>;
+    window.location += 'training/Display/display'; 
 } 
 
     render(){
         return(
                 <form className='form-horizontal'>
-               <div className="container">  
+                 <div className="container">  
                
                  <div className='form-group '>
                  <label > Categories:</label>
                 <input  className=" form-control col-sm-5" 
                 type="text" name="categories" value={this.state.categories} 
-                onChange={this.handleChange}/>
+                onChange={this.handleChange} required/>
                 </div>
                 
                 <div className='form-group'>       
@@ -72,15 +69,4 @@ handleChange= e => {
         );
     }
 }
- class Input extends React.Component{
-     render(){
-         return(
-             <div>
-               <div className="heading">Schedule Training Events</div>
-               <Create/>
-               
-             </div>
-         );
-     }
- }
-export default Input;
+export default Create;

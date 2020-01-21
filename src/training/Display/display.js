@@ -1,10 +1,10 @@
 import React ,{components} from 'react';
-//import TableRow from './tableRow.js';
 
 class Table extends React.Component{
     render(){
         return(
-             <div className='container'>
+            <div>
+            <div className='container'>
             <h3>Events List</h3>
             <table className='table '>
             <thead className='thead-light'> 
@@ -17,6 +17,7 @@ class Table extends React.Component{
             </thead>
             </table> 
             </div> 
+            </div>
         );
     }
 }

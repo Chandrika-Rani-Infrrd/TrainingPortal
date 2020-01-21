@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Create from './training/Create/create';
+import Header from './training/Create/header';
+import Table from './training/Display/display';
+import {BrowserRouter,Route, Link} from 'react-router-dom';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        
-        hello world
-      
+         <Header  heading="scheduling training events"/>
+        <BrowserRouter>
+          <div>
+           <Route exact path='/' component={Create}/>
+           <Route exact path='/training/Display/display' component={Table}/>
+            </div>  
+        </BrowserRouter>
       </div>
     );
   }
