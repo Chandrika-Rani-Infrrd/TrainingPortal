@@ -1,5 +1,5 @@
 import React,{components} from 'react';
-import Input from './create';
+import Input from './Form';
 import './header.css';
 
 function Header(props){
