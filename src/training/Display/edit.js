@@ -29,68 +29,66 @@ class Edit extends React.Component{
         })
         localStorage.setItem('list',JSON.stringify(updatedData));
          e.preventDefault();
-        this.props.history.push('/training/Display/table');
+        this.props.history.push('/training/Display/display/'+index);
     };
     render(){
         let index=this.props.match.params.id;
          return(
             <div>
-           {this.state.datas.map((data,dataindex)=>{
-             if(dataindex==index)
-                return (
-             <form className='form-horizontal'>
-            <div className="container">  
-            <h3>Edit Form</h3>
+                {this.state.datas.map((data,dataindex)=>{
+                    if(dataindex==index)
+                        return (
+                            <form className="container">  
+                                <h3 className="margin">Edit Form</h3>
 
-            <div className='form-group '>
-            <label htmlFor="props.categories" > Categories: </label>
-           <input  className=" form-control col-sm-5" 
-               type="text" name="categories" defaultValue={data.categories} 
-               onChange={this.handleChange}/>
-           </div>
+                                    <div className='form-group'>
+                                        <label htmlFor="categories"> <b>Categories:</b></label>
+                                            <input  className=" form-control" style={{width:300}}
+                                                type="text" name="categories" defaultValue={data.categories} 
+                                                onChange={this.handleChange}/>
+                                     </div>
            
-           <div className='form-group'>       
-            <label htmlFor="props.topic" >Topic:</label> 
-           <input className=" form-control col-sm-5 " 
-               type="text" name='topic' defaultValue={data.topic}
-               onChange={this.handleChange}/>
-           </div>
+                                    <div className='form-group'>       
+                                        <label htmlFor="topic"><b>Topic:</b></label> 
+                                            <input className=" form-control " style={{width:300}}
+                                               type="text" name='topic' defaultValue={data.topic}
+                                               onChange={this.handleChange}/>
+                                    </div>
          
-           <div className='form-group'>
-           <label htmlFor="props.host">Host:  </label>
-           <input className="form-control col-sm-5 " 
-               type="text" name="host" defaultValue={data.host}
-               onChange={this.handleChange}/>
-          </div>
+                                     <div className='form-group'>
+                                        <label htmlFor="host"><b>Host</b>:</label>
+                                            <input className="form-control " style={{width:300}}
+                                               type="text" name="host" defaultValue={data.host}
+                                               onChange={this.handleChange}/>
+                                    </div>
 
-           <div className='form-group'>
-           <label htmlFor="props.data">Date:</label>
-           <input className="form-control col-sm-5 " 
-               type="date" name="date" defaultValue={data.date}
-               onChange={this.handleChange}/>
-            </div>
+                                    <div className='form-group'>
+                                        <label htmlFor="data"><b>Date:</b></label>
+                                            <input className="form-control" style={{width:300}}
+                                               type="date" name="date" defaultValue={data.date}
+                                               onChange={this.handleChange}/>
+                                    </div>
 
-            <div className='form-group'>
-           <label htmlFor="props.duration">Duration:</label>
-           <input className="form-control col-sm-5" 
-               type="number" name="duration" defaultValue={data.duration}
-               onChange={this.handleChange}/>
-            </div>
+                                    <div className='form-group'>
+                                        <label htmlFor="duration"><b>Duration:</b></label>
+                                            <input className="form-control" style={{width:300}}
+                                               type="number" name="duration" defaultValue={data.duration}
+                                               onChange={this.handleChange}/>
+                                    </div>
 
-           <div>
-           <input className="btn btn-primary" 
-               type="button" name="save" value="save"
-               style={{margin:"10px"}} onClick={this.handleSubmit} />
-                <Link to='/training/Display/table'>
-               <button className="btn btn-primary" name="back">Back</button> 
-               </Link> 
-           </div> 
-           </div>
-           </form>
-           ); 
-         })
-        }
-    </div>
- )}
+                                    <div>
+                                        <input className="btn btn-primary" 
+                                            type="button" name="save" value="Save"
+                                            style={{margin:"10px"}} onClick={this.handleSubmit} />
+                                        <Link to='/training/Display/table'>
+                                            <button className="btn btn-primary" style={{margin:"5px"}}>Back</button> 
+                                        </Link> 
+                                    </div> 
+                            </form>
+                        ); 
+                   })
+                }
+         </div>
+    )}
 }
 export default Edit;

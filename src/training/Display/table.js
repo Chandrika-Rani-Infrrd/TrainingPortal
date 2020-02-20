@@ -1,8 +1,18 @@
 import React ,{components} from 'react';
-import { withRouter,Link} from 'react-router-dom';
+import {withRouter,Link} from 'react-router-dom';
 import Display from './display';
-import Edit from './edit';
+import Header from '../Shared/header';
+import './table.css';
+import Search from './search';
 
+
+function EventHeader(){
+    return(
+        <div className="eventheader row">
+            <h3 className="eventlist">Events List</h3>
+        </div>
+        )
+    }
 class Table extends React.Component{
     constructor(props){
         super(props);
@@ -11,68 +21,45 @@ class Table extends React.Component{
             datas:data
         }  
    } 
-   handleDelete=(index)=>{
-    const datas = [...this.state.datas];
-    datas.splice(index, 1);
-    this.setState({datas});
-    this.setState((state)=>{
-        state.datas=datas
-        }); 
-        localStorage.setItem('list',JSON.stringify(datas));
-};
- handleEdit(index){
-this.props.history.push('/training/Display/edit/'+index);
-} 
-handleDisplay(index,data){
-this.props.history.push('/training/Display/display/'+index);
-}
- render(){
-    return(
-            <div>
-            <div className='container'>
-            <h3>Events List</h3>
-            <table className='table '>
-            <thead className='thead-light'> 
-            <tr>
-            <th className='col-sm-' >Categories</th>
-            <th className='col-sm-'>Topic</th>
-            <th className='col-sm-'>Date</th>
-            <th className='col-sm-'>Actions</th>
-            </tr>
-            </thead>
-               <tbody>
-                  {this.state.datas.map((data,index)=> {
-                    return(
-                        <tr key={index} >
-                        <td>{data.categories}</td>
-                        <td>{data.topic}</td>
-                        <td>{data.date}</td> 
-                        <td >
-                            <Link to='/training/Display/signUp'>
-                            <button style={{margin:"5px"}} className="btn btn-primary"> sign-up</button>
-                            </Link>
-                            
-                            <button style={{margin:"5px"}} className="btn btn-primary"
-                            onClick={()=>this.handleEdit(index)}>Edit</button>
-                                                      
-                            <button style={{margin:"5px"}} className="btn btn-primary"
-                            onClick={ (e)=>this.handleDisplay(index,data) }
-                            > Display</button>
-                          
-                            <button style={{margin:"5px"}}  onClick={(e)=>this.handleDelete(index)}
-                            className="btn btn-primary">Delete</button>
-                           
-                        </td>
+    handleAdd=()=>{
+        this.props.history.push('/training/Create/Form');
+    }
+    handleClick=(index)=>{
+        this.props.history.push('/training/Display/display/'+index);
+    } 
+    render(){
+        return(
+            <div >
+            <EventHeader/>
+            <Search/>
+            <div className='container '>
+                <table className='table table-hover'>
+                    <thead className='thead-light'> 
+                        <tr >
+                            <th>Categories</th>
+                            <th>Topic</th>
+                            <th>Date</th>
                         </tr>
-                           );     
-                     })
-                }  
-            </tbody>  
-            </table> 
-            </div> 
+                    </thead>
+                    <tbody>
+                        {this.state.datas.map((data,index)=> {                    
+                          return(
+                            <tr className="tabledata" key={index}
+                               onClick={()=>this.handleClick(index)}>
+                                <td>{data.categories}</td>
+                                <td>{data.topic}</td>
+                                <td>{data.date}</td> 
+                            </tr>
+                             );     
+                           })
+                        }  
+                    </tbody>  
+                </table> 
             </div>
+            <button className="btn btn-primary add" name="Add"
+                onClick={this.handleAdd}>Add</button>
+        </div>
         );
     }
-    
 }
 export default Table;
