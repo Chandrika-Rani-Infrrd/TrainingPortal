@@ -10,7 +10,10 @@
     margin-top:10px;
 }
 .add{
-    margin-left: 60px;
+    text-align: start;
+}
+.btn{
+    margin: 5px;
 }
 .table{
     margin-top:10px;
