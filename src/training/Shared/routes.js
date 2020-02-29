@@ -4,7 +4,7 @@ import Header from './header';
 import Table from '../Display/table';
 import Display from '../Display/display';
 import SignUp from '../Create/signUp';
-import Edit from  '../Display/edit';
+import Edit from  '../Edit/edit';
 import {Router,Route,BrowserRouter,browserHistory} from 'react-router-dom';
 class Routes extends React.Component{
 render() {
@@ -15,7 +15,7 @@ render() {
            <Route exact path='/training/Create/Form' component={Form}/>
            <Route exact path='/training/Display/table' component={Table}/>  
            <Route exact path='/training/Display/display/:id'component={Display} />
-           <Route exact path='/training/Display/edit/:id' component={Edit}/>   
+           <Route exact path='/training/Edit/edit' component={Edit}/>   
         </BrowserRouter>
       </div>
     );
