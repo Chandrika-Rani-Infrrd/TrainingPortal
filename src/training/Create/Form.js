@@ -3,20 +3,31 @@ import './form.css';
 import DatePicker from 'react-date-picker';
 import { withRouter} from 'react-router-dom';
 import Table from '../Display/table';
+import Formfield from '../Create/formField';
+import FormButtons from './fromButtons';
 
 class Form extends React.Component {
     constructor(props){
         super(props);
         this.state={
-         categories:" " , topic:" ",date:'new Date()', duration:" " ,host:" ",list:[]
+         categories:"" , topic:" ",host:" ",date:'new Date()', duration:" ",list:[]
         };
     }
-    handleChange= e => {
-        e.preventDefault();
-        this.setState({
-            [e.target.name]:e.target.value
-        });  
-    };
+    handleCategories=(e)=>{
+        this.setState({categories:e.target.value})
+    }
+    handleTopic=(e)=>{
+        this.setState({topic:e.target.value})
+    }
+    handleHost=(e)=>{
+        this.setState({host:e.target.value})
+    }
+    handleDate=(e)=>{
+        this.setState({date:e.target.value})  
+    }
+    handleDuration=(e)=>{
+        this.setState({duration:e.target.value})
+    }
     handleAdd= (e) =>{
         e.preventDefault();
         let list=this.state.list;
@@ -42,50 +53,25 @@ class Form extends React.Component {
     render(){
         return(  
             <form className="container">
-                <h3 style={{margin:10}}>Create Form</h3>
+                <h3 className="createForm">Create Training Form</h3>
 
-                     <div className='form-group'>
-                         <label htmlFor="categories"><b>Categories: </b></label>
-                            <input  className="form-control formfield" autoComplete="off" id="cat"
-                               type="text" name="categories" value={this.props.categories} 
-                               onChange={this.handleChange}/>
-                    </div> 
-                
-                    <div className='form-group'>       
-                         <label htmlFor="topic"><b>Topic:</b></label> 
-                             <input className=" form-control formfield" autoComplete="off"
-                               type="text" name='topic' value={this.props.topic}
-                               onChange={this.handleChange}/>
-                     </div>
-              
-                     <div className='form-group'>
-                        <label htmlFor="host"><b>Host:</b></label>
-                            <input className="form-control formfield" autoComplete="off"
-                               type="text" name="host" value={this.props.host}
-                               onChange={this.handleChange}/>
-                    </div>
+                   <Formfield nameOfField="Categories" fieldType="text"
+                    fieldValue={this.state.categories} handleChange={this.handleCategories}/>
 
-                    <div className='form-group'>
-                        <label htmlFor="data"><b>Date:</b></label>
-                            <input className="form-control formfield" autoComplete="off" 
-                                type="date" name="date" value={this.props.date}
-                                onChange={this.handleChange}/>
-                    </div>
- 
-                    <div className='form-group'>
-                        <label htmlFor="duration"><b>Duration:</b></label>
-                            <input className="form-control formfield" autoComplete="off"
-                                type="number" name="duration"  value={this.props.duration}
-                                onChange={this.handleChange}/>
-                    </div>
-
-                    <div>
-                        <button className="btn btn-primary " 
-                            type="submit" name="add" 
-                            onClick={this.handleAdd}>Add Event</button>
-                        <button className="btn btn-primary" name="close" 
-                            onClick={this.handleClose}>Close</button>
-                    </div>
+                    <Formfield nameOfField='topic' fieldType="text"
+                    fieldValue={this.state.topic} handleChange={this.handleTopic}/>    
+                  
+                    <Formfield nameOfField='host' fieldType="text"
+                    fieldValue={this.state.host} handleChange={this.handleHost}/> 
+                    
+                    <Formfield nameOfField='date' fieldType="date"
+                    fieldValue={this.state.date} handleChange={this.handleDate}/>
+                   
+                   <Formfield nameOfField='duration' fieldType="number"
+                    fieldValue={this.state.duration} handleChange={this.handleDuration}/>
+                   
+                    <FormButtons btnName="Add Event" handleButtons={this.handleAdd}
+                     handleClose={this.handleClose}/>
                 </form>
         );
     }
