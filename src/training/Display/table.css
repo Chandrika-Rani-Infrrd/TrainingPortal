@@ -1,11 +1,11 @@
-.eventheader{
+.eventHeader{
     width: 100%;
     display: flex;
     justify-content: flex-start; 
     height:55px;
     border-bottom: 1px solid black;
 }
-.eventlist{
+.eventList{
     margin:auto;
     margin-top:10px;
 }
@@ -24,7 +24,7 @@
     margin-top:3px;
     color:black;
 }
-.popup{
+.popupModal{
     position:fixed;
     height: 100%;
     width: 100%;
@@ -35,7 +35,7 @@
     margin: auto;
     background-color: rgba(0,0,0,0.5);
 }
-.popup_inner{
+.popupModal_Inner{
     position: absolute;
     border-radius: 8%;
     top:3%;

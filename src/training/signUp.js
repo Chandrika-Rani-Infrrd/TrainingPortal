@@ -5,42 +5,41 @@ import {withRouter} from 'react-router-dom';
 class SignUp extends React.Component{
     constructor(props){
         super(props);
-    this.state={
-        name:'',
-        email:'',
-        password:'',
-        nameError:'',
-        emailError:'',
-        passwordError:''
+        this.state={
+            name:'',
+            email:'',
+            password:'',
+            nameError:'',
+            emailError:'',
+            passwordError:''
+        }
     }
-}
     handleChange=(e)=>{
         this.setState({
             [e.target.name]:e.target.value
         })
     };
     validate=()=>{
-       let nameError='';
-       let emailError='';
-       let passwordError='';
-       if(!this.state.name){
-        nameError="name can't be empty";
-       }
-       if(!this.state.email.includes('@')){
-        emailError="invalid email";
-       }
-       if(!this.state.password){
-        passwordError="password can't be empty";
-       }
-       if(nameError||emailError||passwordError){
-        this.setState({
-           nameError,emailError,passwordError
-        });
-        return false;
+        let nameError='';
+        let emailError='';
+        let passwordError='';
+            if(!this.state.name){
+                nameError="name can't be empty";
+            }
+            if(!this.state.email.includes('@')){
+                emailError="invalid email";
+            }
+            if(!this.state.password){
+                passwordError="password can't be empty";
+            }
+            if(nameError||emailError||passwordError){
+                this.setState({
+                   nameError,emailError,passwordError
+                });
+            return false;
         }
         return true;
     }
-
     handleSubmit=(e)=>{
         e.preventDefault();
         const isValid=this.validate();

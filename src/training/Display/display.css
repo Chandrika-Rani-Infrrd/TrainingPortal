@@ -4,7 +4,7 @@
     flex-direction: column;
     align-items:center;  
 }
-.displaydata{
+.displayData{
     border: 2px solid gray;
     border-radius: 5px;
     box-shadow: 2px 2px 4px gray;

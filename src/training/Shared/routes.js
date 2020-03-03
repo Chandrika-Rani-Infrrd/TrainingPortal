@@ -6,8 +6,8 @@ import Display from '../Display/display';
 import SignUp from '../Create/signUp';
 import Edit from  '../Edit/edit';
 import {Router,Route,BrowserRouter,browserHistory} from 'react-router-dom';
-class Routes extends React.Component{
-render() {
+
+export default function Routes(){
     return (
       <div className="router">
         <BrowserRouter history={browserHistory}>
@@ -19,6 +19,4 @@ render() {
         </BrowserRouter>
       </div>
     );
-  }
 }
-export default Routes;
