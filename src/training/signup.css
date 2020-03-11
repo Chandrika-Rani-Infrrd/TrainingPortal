@@ -1,0 +1,15 @@
+.error{
+    color: red;
+    margin-top: 5px;
+}
+.submit{
+    margin-top: 10px;
+    text-align: center;
+}
+.form{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.container{
+    display:flex;
+}
