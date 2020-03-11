@@ -69,7 +69,7 @@ export default class Table extends React.Component{
                                 <td>{data.categories}</td>
                                 <td>{data.topic}</td>
                                 <td>{moment(data.date).format('DD-MM-YYYY')}</td>
-                                <td onClick={(e)=>e.stopPropagation()}>                              
+                                <td onClick={(e)=>e.stopPropagation()} >                              
                                     <button className="btn btn-primary" onClick={(e)=>this.handleDelete(index)}>
                                         Delete
                                     </button>

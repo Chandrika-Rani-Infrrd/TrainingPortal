@@ -3,7 +3,7 @@ import Form from '../Create/Form';
 import Header from './header';
 import Table from '../Display/table';
 import Display from '../Display/display';
-import SignUp from '../Create/signUp';
+import SignUp from '../signUp.js';
 import Edit from  '../Edit/edit';
 import {Router,Route,BrowserRouter,browserHistory} from 'react-router-dom';
 

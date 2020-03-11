@@ -1,96 +1,63 @@
 import React,{components}  from 'react';
-import Form from "../training/Create/Form";
+import {Formik,Form,Field,ErrorMessage} from 'formik';
 import {withRouter} from 'react-router-dom';
+import  * as Yup from 'yup';
+import './signup.css';
 
-class SignUp extends React.Component{
-    constructor(props){
-        super(props);
-        this.state={
-            name:'',
-            email:'',
-            password:'',
-            nameError:'',
-            emailError:'',
-            passwordError:''
-        }
-    }
-    handleChange=(e)=>{
-        this.setState({
-            [e.target.name]:e.target.value
-        })
-    };
-    validate=()=>{
-        let nameError='';
-        let emailError='';
-        let passwordError='';
-            if(!this.state.name){
-                nameError="name can't be empty";
-            }
-            if(!this.state.email.includes('@')){
-                emailError="invalid email";
-            }
-            if(!this.state.password){
-                passwordError="password can't be empty";
-            }
-            if(nameError||emailError||passwordError){
-                this.setState({
-                   nameError,emailError,passwordError
-                });
-            return false;
-        }
-        return true;
-    }
-    handleSubmit=(e)=>{
-        e.preventDefault();
-        const isValid=this.validate();
-        if(isValid){
-        this.setState({
-        name:'',
-        email:'',
-        password:'',
-        nameError:'',
-        emailError:'',
-        passwordError:'' 
-       })
-       this.props.history.push('/training/Create/Form');
-    }
-    };
+const validation=Yup.object().shape({
+    name:Yup.string().required("Name can't be empty"),
+    email:Yup.string().required("email can't be empty"),
+    password:Yup.string().min("4","Minimum of 6 characters")
+              .max("10","not more than 10 characters")
+              .required("can't be empty")
+})
+
+export default class SignUp extends React.Component{
     render(){
         return(
-            <form className='container'>
-             <h3 style={{margin:15}}>Sign-up Form</h3>
-
-                <div className='form-group'>
-                    <label><b>Name:</b></label>
-                       <input  className=" form-control" style={{width:300}} 
-                          placeholder="Enter your name" name="name" autoComplete="off"
-                          onChange={this.handleChange}/>
-                       <div style={{color:"red"}}>{this.state.nameError}</div>
-                </div>
-
-                <div className='form-group'>
-                    <label><b>EMail:</b></label>
-                       <input  className="form-control " style={{width:300}} type="email"
-                           placeholder="Enter your Email" name="email" autoComplete="off"
-                           onChange={this.handleChange}/>
-                       <div style={{color:"red"}}>{this.state.emailError}</div>
-                </div>
-
-                <div className='form-group '>
-                     <label className="col-sm-"><b>Password</b>:</label>
-                        <input  className="form-control " style={{width:300}}
-                           placeholder="Enter your password" type="password" 
-                           name="password" autoComplete="off" onChange={this.handleChange}/>
-                        <div style={{color:"red"}}>{this.state.passwordError}</div>
-                </div>
-
-                <div>
-                     <input style={{margin:"5px"}}className="btn btn-primary" 
-                        type="button" name="sign-up" value="Sign-up" 
-                        onClick={this.handleSubmit} />
-                </div>
-            </form>
-        )
-    }
-}
-export default SignUp;
+            <Formik
+                initialValues={{
+                    name:'',
+                    email:'',
+                    password:''
+                }}
+                onSubmit={(values)=>{
+                    console.log("values "+values);
+                    this.props.history.push('/training/Display/table');
+                }}
+                validationSchema={validation}
+    render={({error})=>{
+        return(
+            <div className="container">
+                <h3>SignUp Form</h3>
+                <Form className="form-group">
+                    <label><b>Name</b></label>
+                    <Field 
+                        className="form-control form"
+                        name="name" 
+                        type="text"
+                        placeholder="Enter the name" 
+                    />
+                    <ErrorMessage component="div" className="error" name="name" />                   
+                    <label><b>Email</b></label>
+                    <Field 
+                        className="form-control form" 
+                        name="email"
+                        type="text"
+                        placeholder="Enter the email" 
+                    />
+                    <ErrorMessage component="div" className="error" name="email" />                   
+                    <label><b>Password</b></label>
+                    <Field 
+                        className="form-control form" 
+                        name="password" 
+                        type="password" 
+                        placeholder="Enter the password"
+                    /> 
+                    <ErrorMessage component="div" className="error" name="password" />
+                    <button className="btn btn-primary submit">Submit</button>             
+                </Form>
+            </div>
+            )}}
+        />
+)}}
