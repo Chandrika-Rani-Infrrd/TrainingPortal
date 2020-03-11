@@ -3,8 +3,16 @@ import Form from '../Create/Form';
 import Header from './header';
 import Table from '../Display/table';
 import Display from '../Display/display';
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import SignUp from '../Create/signUp';
 import Edit from  '../Display/edit';
+=======
+=======
+>>>>>>> Stashed changes
+import SignUp from '../signUp.js';
+import Edit from  '../Edit/edit';
+>>>>>>> Stashed changes
 import {Router,Route,BrowserRouter,browserHistory} from 'react-router-dom';
 class Routes extends React.Component{
 render() {
