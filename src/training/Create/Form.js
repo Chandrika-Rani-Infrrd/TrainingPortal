@@ -2,22 +2,36 @@ import React ,{components} from 'react';
 import './form.css';
 import DatePicker from 'react-date-picker';
 import { withRouter} from 'react-router-dom';
-import Table from '../Display/table';
+import FormField from '../Create/formField';
+import FormButtons from './fromButtons';
 
-class Form extends React.Component {
+export default class Form extends React.Component {
     constructor(props){
         super(props);
         this.state={
-         categories:" " , topic:" ",date:'new Date()', duration:" " ,host:" ",list:[]
+            categories:"" , topic:" ",host:" ",date:'new Date()', duration:" ",list:[]
         };
     }
-    handleChange= e => {
-        e.preventDefault();
-        this.setState({
-            [e.target.name]:e.target.value
-        });  
-    };
-    handleAdd= (e) =>{
+    componentDidMount(){
+        let data=JSON.parse(localStorage.getItem('list'));
+        this.setState({list:data}); 
+    }
+    handleCategories=(e)=>{
+        this.setState({categories:e.target.value})
+    }
+    handleTopic=(e)=>{
+        this.setState({topic:e.target.value})
+    }
+    handleHost=(e)=>{
+        this.setState({host:e.target.value})
+    }
+    handleDate=(e)=>{
+        this.setState({date:e.target.value})  
+    }
+    handleDuration=(e)=>{
+        this.setState({duration:e.target.value})
+    }
+    handleAddEvents= (e) =>{
         e.preventDefault();
         let list=this.state.list;
         list.push({
@@ -25,69 +39,56 @@ class Form extends React.Component {
         topic:this.state.topic,
         host:this.state.host,
         date:this.state.date,
-        duration:this.duration  
+        duration:this.state.duration  
     });
         localStorage.setItem('list',JSON.stringify(list));
         alert( this.state.topic+" add successfully ");  
         this.setState({categories:'',topic:''}) 
     };
-    handleClose=()=>{
+    handleCloseCreateForm=()=>{
         this.props.history.push('/training/Display/table');
-    }
-    componentDidMount(){
-        let data=JSON.parse(localStorage.getItem('list'));
-        this.setState({
-            list:data }); 
     } 
     render(){
         return(  
             <form className="container">
-                <h3 style={{margin:10}}>Create Form</h3>
-
-                     <div className='form-group'>
-                         <label htmlFor="categories"><b>Categories: </b></label>
-                            <input  className="form-control formfield" autoComplete="off" id="cat"
-                               type="text" name="categories" value={this.props.categories} 
-                               onChange={this.handleChange}/>
-                    </div> 
-                
-                    <div className='form-group'>       
-                         <label htmlFor="topic"><b>Topic:</b></label> 
-                             <input className=" form-control formfield" autoComplete="off"
-                               type="text" name='topic' value={this.props.topic}
-                               onChange={this.handleChange}/>
-                     </div>
-              
-                     <div className='form-group'>
-                        <label htmlFor="host"><b>Host:</b></label>
-                            <input className="form-control formfield" autoComplete="off"
-                               type="text" name="host" value={this.props.host}
-                               onChange={this.handleChange}/>
-                    </div>
-
-                    <div className='form-group'>
-                        <label htmlFor="data"><b>Date:</b></label>
-                            <input className="form-control formfield" autoComplete="off" 
-                                type="date" name="date" value={this.props.date}
-                                onChange={this.handleChange}/>
-                    </div>
- 
-                    <div className='form-group'>
-                        <label htmlFor="duration"><b>Duration:</b></label>
-                            <input className="form-control formfield" autoComplete="off"
-                                type="number" name="duration"  value={this.props.duration}
-                                onChange={this.handleChange}/>
-                    </div>
-
-                    <div>
-                        <button className="btn btn-primary " 
-                            type="submit" name="add" 
-                            onClick={this.handleAdd}>Add Event</button>
-                        <button className="btn btn-primary" name="close" 
-                            onClick={this.handleClose}>Close</button>
-                    </div>
+                <h3 className="createForm">Create Training Form</h3>
+                    <FormField 
+                       nameOfField="Categories" 
+                       fieldType="text"
+                       fieldValue={this.state.categories} 
+                       handleChange={this.handleCategories}
+                    />
+                    <FormField 
+                       nameOfField='topic' 
+                       fieldType="text"
+                       fieldValue={this.state.topic} 
+                       handleChange={this.handleTopic}
+                    />                     
+                    <FormField 
+                        nameOfField='host' 
+                        fieldType="text"
+                        fieldValue={this.state.host} 
+                        handleChange={this.handleHost}
+                    />                    
+                    <FormField 
+                        nameOfField='date' 
+                        fieldType="date"
+                        fieldValue={this.state.date} 
+                        handleChange={this.handleDate}
+                    />                   
+                    <FormField 
+                        nameOfField='duration' 
+                        fieldType="number"
+                        fieldValue={this.state.duration} 
+                        handleChange={this.handleDuration}
+                    />                  
+                    <FormButtons 
+                        btnName="Add Event" 
+                        handleButtons={this.handleAddEvents}
+                        handleClose={this.handleCloseCreateForm}
+                    />
                 </form>
         );
     }
 }
-export default Form;
+
