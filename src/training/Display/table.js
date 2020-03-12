@@ -3,8 +3,6 @@ import {withRouter,Link} from 'react-router-dom';
 import Display from './display';
 import Header from '../Shared/header';
 import './table.css';
-import Search from './search';
-
 
 function EventHeader(){
     return(
@@ -18,9 +16,16 @@ class Table extends React.Component{
         super(props);
         let data=JSON.parse(localStorage.getItem('list'));
         this.state={
-            datas:data
+            datas:data,
+            search:''
         }  
    } 
+   handleSearch=(e)=>{
+       let target=e.target;
+        this.setState({
+            search:target.value
+        })
+    }
     handleAdd=()=>{
         this.props.history.push('/training/Create/Form');
     }
@@ -28,11 +33,13 @@ class Table extends React.Component{
         this.props.history.push('/training/Display/display/'+index);
     } 
     render(){
+        let searchValue=this.state.search;
+        console.log("search value "+searchValue);
         return(
             <div >
             <EventHeader/>
-            <Search/>
-            <div className='container '>
+            <input className="form-control col-sm-3 Search" placeholder="Search" onChange={this.handleSearch} />
+            <div className='container' >
                 <table className='table table-hover'>
                     <thead className='thead-light'> 
                         <tr >
@@ -42,7 +49,8 @@ class Table extends React.Component{
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.datas.map((data,index)=> {                    
+                        {this.state.datas.map((data,index)=> {  
+                          if(searchValue==="" || data.categories.startsWith(searchValue))                  
                           return(
                             <tr className="tabledata" key={index}
                                onClick={()=>this.handleClick(index)}>
